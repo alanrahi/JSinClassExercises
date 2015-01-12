@@ -1,0 +1,5 @@
+var information = require('./information')
+
+
+
+
