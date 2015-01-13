@@ -7,21 +7,22 @@ var prompt = require('prompt');
 console.log(gameMaker);
 
 //puts player into the entrance room
-var entranceRoom;
+var currentRoom;
 	
 	map.rooms.forEach(function(room) 
 		{
-		if (room.entrance) {entranceRoom = room;}
+		if (room.entrance) {currentRoom = room;}
 		});
 	
 		
 
-var player = {
-	"inRoom": entranceRoom,
+
 	
-}
+
 
 prompt.start();
+
+var roomKeys = { "a":1, "b":2, "c":3, "d":4, "e":5, "f":6, "g":7, "h":8, "i":9, "j":10, "k":11}
 
 var affordances = [];
 
@@ -49,24 +50,81 @@ var property = {
 are " + WhereYouCanGo.length + " Doors. You can go " + WhereYouCanGo + " Please choose a direction."
 };
 
-prompt.get(property, function(err, input) {
-	var move = input;
-	console.log(input);
+prompt.get(property, function(err, input) 
+{
+		var move = input;
+		console.log(input);
 
-	maps.rooms.forEach(function(room) {
-		if (input === "north") { for (var i = 0; i < rooms.length; i++) {
-	
-+			if ("E" === rooms[i].name) 
-+				currentRoom = rooms[i];}
-	console.log(currentRoom.name);
+	if (input === "north")
+		{ maps.rooms.forEach(function(room) 
+			{
+				if (room.name === currentRoom.north) {currentRoom = room;}
+			});
+		};
 
+	if (input === "south")
+		{ maps.rooms.forEach(function(room)	
+			{
+				if (room.name === currentRoom.north) {currentRoom = room;}
+			});
+		};
 
-	})
+	if (input === "east") 
+		{ maps.rooms.forEach(function(room) 
+			{
+				if (room.name === currentRoom.east) {currentRoom = room;}
+			});
+		}
 
-
-
+	if (input === "west") 
+		{ maps.rooms.forEach(function(room) 
+			{
+				if (room.name === currentRoom.west) {currentRoom = room;}
+			});
+		}	
 });
 
+var WhereYouCanGo = WhereCanYouGo(player.inRoom);
+
+var property = {
+	direction: 'input',
+	message: "You are standing in a room. There \
+are " + WhereYouCanGo.length + " Doors. You can go " + WhereYouCanGo + " Please choose a direction."
+};
+
+prompt.get(property, function(err, input) 
+{
+		var move = input;
+		console.log(input);
+
+	if (input === "north")
+		{ maps.rooms.forEach(function(room) 
+			{
+				if (room.name === currentRoom.north) {currentRoom = room;}
+			});
+		};
+
+	if (input === "south")
+		{ maps.rooms.forEach(function(room)	
+			{
+				if (room.name === currentRoom.north) {currentRoom = room;}
+			});
+		};
+
+	if (input === "east") 
+		{ maps.rooms.forEach(function(room) 
+			{
+				if (room.name === currentRoom.east) {currentRoom = room;}
+			});
+		}
+
+	if (input === "west") 
+		{ maps.rooms.forEach(function(room) 
+			{
+				if (room.name === currentRoom.west) {currentRoom = room;}
+			});
+		}	
+});
 
 
 
